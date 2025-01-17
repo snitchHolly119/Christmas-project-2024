@@ -3,9 +3,13 @@ function drag(event) {
 }
 
 function drop(event) {
-    event.preventDefault();
-    let data = event.dataTransfer.getData("text");
-    event.target.appendChild(document.getElementById(data));
+    console.log(event.target);
+    console.log(event.target.id);
+        event.preventDefault();
+        let data = event.dataTransfer.getData("text");
+        if(event.target.id==='basket1' || event.target.id==='basket2' || event.target.id==='basket3') {
+        event.target.appendChild(document.getElementById(data));
+    }
 }
 
 function allowDrop(event) {
@@ -24,15 +28,11 @@ let countGreen = 0;
 let countRed = 0;
 
 let greenApples = document.querySelectorAll(".apple[data-color='green']");
-let crimsonApples = apples.length - greenApples.length;
-
 let start = Date.now();
-console.log(start);
 
-let counter = 30;
 
 play.addEventListener("click", function(){
-    counter = 30;
+    let counter = 30;
     
     if (play.parentNode.children[2].textContent == "Play") {
     
@@ -42,8 +42,9 @@ play.addEventListener("click", function(){
         location.reload();
     }
     
+
     let second = setInterval(function(){
-        //console.log("+1 second");
+     
         counter = counter - 1;
         timer.textContent = "SCORE: " + counter;
         if(basket_2.children.length == 0){
@@ -64,7 +65,6 @@ play.addEventListener("click", function(){
     
     let stop = setTimeout(function(){
         clearInterval(second);
-        //console.log("Stop!");
         
         if(counter == 0) {
             play.parentNode.style.display = "flex";
@@ -74,9 +74,7 @@ play.addEventListener("click", function(){
         }
 
         }
-    , 30000);
-
-    
+    , 30000);    
 });
 
 
